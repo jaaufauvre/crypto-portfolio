@@ -1,0 +1,58 @@
+[
+    {
+        "id": "ETH",
+        "name": "Ethereum",
+        "purchases": [
+            {
+                "comment": "My first purchase",
+                "amount": "100",
+                "@": "12.53",
+                "fees": "3.99",
+                "currency": "EUR",
+                "date": "2016-05-30",
+                "exchange": "Coinbase",
+                "location": "https://enjinx.io/eth/address/{my-address}"
+            },
+            {
+                "comment": "Another purchase",
+                "amount": "1",
+                "@": "162.72",
+                "fees": "0",
+                "currency": "EUR",
+                "date": "2019-11-20",
+                "exchange": "Bitpanda",
+                "location": "https://enjinx.io/eth/address/{my-address}"
+            }
+        ]
+    },
+    {
+        "id": "DOT",
+        "name": "Polkadot",
+        "purchases": [
+            {
+                "amount": "100",
+                "@": "6.7125",
+                "fees": "0",
+                "currency": "EUR",
+                "date": "2020-12-31",
+                "exchange": "Crypto.com",
+                "location": "https://crypto.com/"
+            }
+        ]
+    },
+    {
+        "id": "AVAX",
+        "name": "Avalanche",
+        "purchases": [
+            {
+                "amount": "100",
+                "@": "3.81",
+                "fees": "0",
+                "currency": "EUR",
+                "date": "2020-09-26",
+                "exchange": "Binance",
+                "location": "https://explorer.avax.network/address/{my-address}"
+            }
+        ]
+    }
+]
