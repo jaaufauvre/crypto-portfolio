@@ -5,7 +5,7 @@ Fetch prices for a list of crypto assets and generate a simple portfolio summary
 ## Usage
 
 1. Get a CoinAPI key (https://www.coinapi.io/)
-2. Add it to [`Main.java`](./src/main/java/org/example/Main.java)
+2. Add it to [`Main.java`](./src/main/java/org/example/Main.java) (`API_KEY`)
 2. Run the program:
 
 ```console
@@ -26,3 +26,16 @@ mvn compile exec:java "-Dexec.mainClass=org.example.Main"
 ## Portfolio JSON
 
 Update [`portfolio.json`](./src/main/resources/portfolio.json)
+
+## Troubleshooting
+
+> _An error happened: You didn't specify API key or it is incorrectly formatted. You should do it in query string parameter `apikey` or in http header named `X-CoinAPI-Key`_
+
+Double check the `API_KEY` value in [`Main.java`](./src/main/java/org/example/Main.java)
+
+> _Enter the missing ETH/EUR conversion rate:_
+
+The conversion rate was not found, you have the possibility to type a value and press "Enter".
+
+## See Also
+https://docs.coinapi.io/
