@@ -21,7 +21,7 @@ import static net.steppschuh.markdowngenerator.table.Table.*;
 
 public class Main {
 
-    private static final String API_KEY = "Paste your https://www.coinapi.io API key here";
+    private static final String API_KEY = System.getProperty("crypto_portfolio.coinapi.key");
     private static final OkHttpClient CLIENT = new OkHttpClient();
     private static final ObjectMapper MAPPER = new ObjectMapper();
 

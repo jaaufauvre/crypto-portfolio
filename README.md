@@ -5,14 +5,14 @@ Fetch prices for a list of crypto assets and generate a simple portfolio summary
 ## Usage
 
 1. Get a [CoinAPI](https://www.coinapi.io/) key
-2. Add it to [`Main.java`](src/main/java/org/crypto_portfolio/Main.java)
-3. Run the program:
+2. Run the program:
 
 ```console
-mvn compile exec:java "-Dexec.mainClass=org.crypto_portfolio.Main"
+mvn compile exec:java "-Dexec.mainClass=org.crypto_portfolio.Main" \ 
+                      "-Dcrypto_portfolio.coinapi.key={your-key}"
 ```
 
-4. Default output:
+3. Default output:
 
 ```console
 | Asset     | Amount | @ (Paid)  | @ (Current) | Paid        | Balance      | Gain/Loss     | Change     |
@@ -52,7 +52,7 @@ Update [`portfolio.json`](./src/main/resources/portfolio.json). Format:
 
 > _An error happened: You didn't specify API key or it is incorrectly formatted. You should do it in query string parameter `apikey` or in http header named `X-CoinAPI-Key`_
 
-Double check the `API_KEY` value in [`Main.java`](./src/main/java/org/crypto_portfolio/Main.java)
+Double check your API key value (`-Dcrypto_portfolio.coinapi.key`).
 
 > _Enter the missing ETH/EUR conversion rate:_
 
