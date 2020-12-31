@@ -1,11 +1,11 @@
-package org.example.model;
+package org.crypto_portfolio.model;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.Objects;
 
-import static org.example.math.NumberUtils.withPlusOrMinusPrefix;
+import static org.crypto_portfolio.math.NumberUtils.withPlusOrMinusPrefix;
 
 public class ConsolidatedPortfolio extends ArrayList<ConsolidatedAsset> {
 

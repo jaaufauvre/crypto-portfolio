@@ -1,4 +1,4 @@
-package org.example.model;
+package org.crypto_portfolio.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

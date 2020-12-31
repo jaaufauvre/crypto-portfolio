@@ -1,4 +1,4 @@
-package org.example;
+package org.crypto_portfolio;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -6,10 +6,10 @@ import net.steppschuh.markdowngenerator.text.emphasis.BoldText;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-import org.example.model.Asset;
-import org.example.model.CoinApiRate;
-import org.example.model.ConsolidatedAsset;
-import org.example.model.ConsolidatedPortfolio;
+import org.crypto_portfolio.model.Asset;
+import org.crypto_portfolio.model.CoinApiRate;
+import org.crypto_portfolio.model.ConsolidatedAsset;
+import org.crypto_portfolio.model.ConsolidatedPortfolio;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -21,7 +21,7 @@ import static net.steppschuh.markdowngenerator.table.Table.*;
 
 public class Main {
 
-    private static final String API_KEY = "Put your https://www.coinapi.io API key here";
+    private static final String API_KEY = "Paste your https://www.coinapi.io API key here";
     private static final OkHttpClient CLIENT = new OkHttpClient();
     private static final ObjectMapper MAPPER = new ObjectMapper();
 

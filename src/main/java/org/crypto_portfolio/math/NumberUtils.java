@@ -1,4 +1,4 @@
-package org.example.math;
+package org.crypto_portfolio.math;
 
 import java.math.BigDecimal;
 

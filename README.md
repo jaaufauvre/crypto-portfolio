@@ -4,15 +4,15 @@ Fetch prices for a list of crypto assets and generate a simple portfolio summary
 
 ## Usage
 
-1. Get a CoinAPI key (https://www.coinapi.io/)
-2. Add it to [`Main.java`](./src/main/java/org/example/Main.java) (`API_KEY`)
-2. Run the program:
+1. Get a [CoinAPI](https://www.coinapi.io/) key
+2. Add it to [`Main.java`](src/main/java/org/crypto_portfolio/Main.java)
+3. Run the program:
 
 ```console
-mvn compile exec:java "-Dexec.mainClass=org.example.Main"
+mvn compile exec:java "-Dexec.mainClass=org.crypto_portfolio.Main"
 ```
 
-3. Expected output:
+4. Default output:
 
 ```console
 | Asset     | Amount | @ (Paid)  | @ (Current) | Paid        | Balance      | Gain/Loss     | Change     |
@@ -25,13 +25,34 @@ mvn compile exec:java "-Dexec.mainClass=org.example.Main"
 
 ## Portfolio JSON
 
-Update [`portfolio.json`](./src/main/resources/portfolio.json)
+Update [`portfolio.json`](./src/main/resources/portfolio.json). Format:
+
+```javascript
+[
+  {
+    "id": "{symbol}",
+    "name": "{name}",
+    "purchases": [
+      {
+        "comment": "{optional}",
+        "amount": "{currency/token amount}",
+        "@": "{unit price}",
+        "fees": "{transaction fees}",
+        "currency": "EUR",
+        "date": "{purchase date, format: yyyy-mm-dd, optional}",
+        "exchange": "{exchange name or url, optional}",
+        "location": "{blockchain address or url, optional}"
+      }
+    ]
+  }
+]
+```
 
 ## Troubleshooting
 
 > _An error happened: You didn't specify API key or it is incorrectly formatted. You should do it in query string parameter `apikey` or in http header named `X-CoinAPI-Key`_
 
-Double check the `API_KEY` value in [`Main.java`](./src/main/java/org/example/Main.java)
+Double check the `API_KEY` value in [`Main.java`](./src/main/java/org/crypto_portfolio/Main.java)
 
 > _Enter the missing ETH/EUR conversion rate:_
 
