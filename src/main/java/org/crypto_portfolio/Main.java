@@ -14,28 +14,40 @@ import org.crypto_portfolio.model.ConsolidatedPortfolio;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Scanner;
 
 import static net.steppschuh.markdowngenerator.table.Table.*;
 
 public class Main {
-
-    private static final String API_KEY = System.getProperty("crypto_portfolio.coinapi.key");
     private static final OkHttpClient CLIENT = new OkHttpClient();
     private static final ObjectMapper MAPPER = new ObjectMapper();
+    private static final String API_KEY, PORTFOLIO_PATH;
+    private static final LocalDate NOT_BEFORE;
+    static {
+        String path = System.getProperty("crypto_portfolio.portfolio.path");
+        String notBefore = System.getProperty("crypto_portfolio.date-filter.not-before");
+        API_KEY = System.getProperty("crypto_portfolio.coinapi.key");
+        PORTFOLIO_PATH = path == null ? "src/main/resources/portfolio.json" : path;
+        NOT_BEFORE = notBefore == null ? LocalDate.MIN : LocalDate.parse(notBefore);
+    }
 
     public static void main(String[] args) throws Exception {
         List<Asset> portfolio = readPortfolio();
+        filterPurchases(portfolio);
         ConsolidatedPortfolio consolidatedPortfolio = new ConsolidatedPortfolio();
-        for (Asset asset : portfolio) {
-            consolidatedPortfolio.add(toConsolidatedAsset(asset));
-        }
+        for (Asset asset : portfolio) consolidatedPortfolio.add(toConsolidatedAsset(asset));
         display(consolidatedPortfolio);
     }
 
+    private static void filterPurchases(List<Asset> portfolio) {
+        portfolio.forEach(asset -> asset.getPurchases().removeIf(p -> p.date != null && LocalDate.parse(p.date).isBefore(NOT_BEFORE)));
+        portfolio.removeIf(asset -> asset.getPurchases().isEmpty());
+    }
+
     private static List<Asset> readPortfolio() throws IOException {
-        byte[] portfolioBytes = Files.readAllBytes(Paths.get("src/main/resources/portfolio.json"));
+        byte[] portfolioBytes = Files.readAllBytes(Paths.get(PORTFOLIO_PATH));
         return MAPPER.readValue(portfolioBytes, new TypeReference<List<Asset>>(){});
     }
 
