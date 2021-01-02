@@ -12,6 +12,7 @@ mvn compile exec:java -Dexec.mainClass=org.crypto_portfolio.Main \
                       -Dcrypto_portfolio.coinapi.key={xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} \ 
                       -Dcrypto_portfolio.portfolio.path=src/main/resources/portfolio.json \ 
                       -Dcrypto_portfolio.date-filter.not-before={yyyy-mm-dd}
+                      -Dcrypto_portfolio.ignore-errors=false
 ```
 
 3. Default output:

@@ -16,7 +16,9 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 import static net.steppschuh.markdowngenerator.table.Table.*;
 
@@ -25,19 +27,24 @@ public class Main {
     private static final ObjectMapper MAPPER = new ObjectMapper();
     private static final String API_KEY, PORTFOLIO_PATH;
     private static final LocalDate NOT_BEFORE;
+    private static final Boolean IGNORE_ERRORS;
     static {
         String path = System.getProperty("crypto_portfolio.portfolio.path");
         String notBefore = System.getProperty("crypto_portfolio.date-filter.not-before");
+        String ignoreErrors = System.getProperty("crypto_portfolio.ignore-errors");
         API_KEY = System.getProperty("crypto_portfolio.coinapi.key");
         PORTFOLIO_PATH = path == null ? "src/main/resources/portfolio.json" : path;
         NOT_BEFORE = notBefore == null ? LocalDate.MIN : LocalDate.parse(notBefore);
+        IGNORE_ERRORS = "true".equalsIgnoreCase(ignoreErrors);
     }
 
     public static void main(String[] args) throws Exception {
         List<Asset> portfolio = readPortfolio();
         filterPurchases(portfolio);
-        ConsolidatedPortfolio consolidatedPortfolio = new ConsolidatedPortfolio();
-        for (Asset asset : portfolio) consolidatedPortfolio.add(toConsolidatedAsset(asset));
+        ConsolidatedPortfolio consolidatedPortfolio = portfolio.stream()
+                .map(Main::toConsolidatedAsset)
+                .filter(Objects::nonNull)
+                .collect(Collectors.toCollection(ConsolidatedPortfolio::new));
         display(consolidatedPortfolio);
     }
 
@@ -69,6 +76,10 @@ public class Main {
         }
         if (error == null) {
             return new ConsolidatedAsset(asset, rate.getRate());
+        }
+
+        if (IGNORE_ERRORS) {
+            return null;
         } else {
             System.out.printf("An error happened: %s%n", error);
             System.out.printf("Enter the missing %s/EUR conversion rate: ", asset.getId());
