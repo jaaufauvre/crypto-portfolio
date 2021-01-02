@@ -8,8 +8,10 @@ Fetch prices for a list of crypto assets and generate a simple portfolio summary
 2. Run the program:
 
 ```console
-mvn compile exec:java "-Dexec.mainClass=org.crypto_portfolio.Main" \ 
-                      "-Dcrypto_portfolio.coinapi.key={your-key}"
+mvn compile exec:java -Dexec.mainClass=org.crypto_portfolio.Main \ 
+                      -Dcrypto_portfolio.coinapi.key={xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} \ 
+                      -Dcrypto_portfolio.portfolio.path=src/main/resources/portfolio.json \ 
+                      -Dcrypto_portfolio.date-filter.not-before={yyyy-mm-dd}
 ```
 
 3. Default output:
