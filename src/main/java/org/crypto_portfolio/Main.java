@@ -43,7 +43,6 @@ public class Main {
         filterPurchases(portfolio);
         ConsolidatedPortfolio consolidatedPortfolio = portfolio.stream()
                 .map(Main::toConsolidatedAsset)
-                .filter(Objects::nonNull)
                 .collect(Collectors.toCollection(ConsolidatedPortfolio::new));
         display(consolidatedPortfolio);
     }
@@ -79,8 +78,10 @@ public class Main {
         }
 
         if (IGNORE_ERRORS) {
-            return null;
+            // Create an asset with an "Unknown" unit price in €
+            return new ConsolidatedAsset(asset, null);
         } else {
+            // Expect the missing conversion rate to be typed in the console
             System.out.printf("An error happened: %s%n", error);
             System.out.printf("Enter the missing %s/EUR conversion rate: ", asset.getId());
             return new ConsolidatedAsset(asset, new Scanner(System.in).nextLine());
