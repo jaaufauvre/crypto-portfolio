@@ -16,9 +16,11 @@ public class ConsolidatedPortfolio extends ArrayList<ConsolidatedAsset> {
             return null;
         }
         return stream()
-                .map(ConsolidatedAsset::getTotalPaidDecimal)
-                .filter(Objects::nonNull)
-                .reduce(BigDecimal.ZERO, BigDecimal::add);
+            // Ignore assets for which the current price is unknown
+            .filter(asset -> !asset.isUnitPriceUnknown())
+            .map(ConsolidatedAsset::getTotalPaidDecimal)
+            .filter(Objects::nonNull)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
     }
 
     public String getTotalPaid() {

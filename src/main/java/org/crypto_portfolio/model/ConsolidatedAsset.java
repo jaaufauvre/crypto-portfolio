@@ -10,6 +10,7 @@ import static org.crypto_portfolio.math.NumberUtils.withPlusOrMinusPrefix;
 public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
 
     public static final String UNKNOWN = "Unknown";
+    public static final String IGNORED = "Ignored";
     private final Asset asset;
     private final BigDecimal currentUnitPriceInEuros;
     private final BigDecimal amountDecimal;
@@ -36,7 +37,7 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
         }
     }
 
-    private boolean isUnitPriceUnknown() {
+    public boolean isUnitPriceUnknown() {
         return currentUnitPriceInEuros == null;
     }
 
@@ -66,14 +67,20 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
     }
 
     public String getTotalPaid() {
+        if (isUnitPriceUnknown()) {
+            return IGNORED;
+        }
         return totalPaidDecimal
                 .setScale(2, RoundingMode.HALF_UP)
                 .toPlainString();
     }
 
     public String getPaidUnitPrice() {
-            return totalPaidDecimal.divide(amountDecimal, 6, RoundingMode.HALF_UP)
-                    .toPlainString();
+        if (isUnitPriceUnknown()) {
+            return IGNORED;
+        }
+        return totalPaidDecimal.divide(amountDecimal, 6, RoundingMode.HALF_UP)
+                .toPlainString();
     }
 
     public String getCurrentUnitPrice() {
