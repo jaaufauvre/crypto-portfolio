@@ -9,8 +9,10 @@ import static org.crypto_portfolio.math.NumberUtils.withPlusOrMinusPrefix;
 
 public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
 
-    public static final String UNKNOWN = "Unknown";
-    public static final String IGNORED = "Ignored";
+    private static final String UNKNOWN = "Unknown";
+    private static final String IGNORED = "Ignored";
+    private static final String NON_APPLICABLE = "n/a";
+
     private final Asset asset;
     private final BigDecimal currentUnitPriceInEuros;
     private final BigDecimal amountDecimal;
@@ -138,7 +140,7 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
 
     public String getPercentChange() {
         if (percentageChangeDecimal == null) {
-            return UNKNOWN;
+            return NON_APPLICABLE;
         }
         BigDecimal percentageChange = percentageChangeDecimal.setScale(0, RoundingMode.HALF_UP);
         return withPlusOrMinusPrefix(percentageChange) + "%";
