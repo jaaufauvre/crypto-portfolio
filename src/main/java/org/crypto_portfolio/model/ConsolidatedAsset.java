@@ -81,7 +81,7 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
         if (isUnitPriceUnknown()) {
             return IGNORED;
         }
-        return totalPaidDecimal.divide(amountDecimal, 6, RoundingMode.HALF_UP)
+        return totalPaidDecimal.divide(amountDecimal, 2, RoundingMode.HALF_UP)
                 .toPlainString();
     }
 
@@ -90,7 +90,7 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
             return UNKNOWN;
         }
         return currentUnitPriceInEuros
-                .setScale(6, RoundingMode.HALF_UP)
+                .setScale(2, RoundingMode.HALF_UP)
                 .toPlainString();
     }
 
