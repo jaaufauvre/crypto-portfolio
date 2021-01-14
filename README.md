@@ -2,6 +2,8 @@
 
 Fetch prices for a list of crypto assets and generate a simple portfolio summary. See also: https://www.coinapi.io.
 
+[![](https://img.shields.io/badge/license-The%20Unlicense-yellow.svg)](https://github.com/jaaufauvre/crypto-portfolio/blob/main/LICENSE)
+
 ## Usage
 
 1. Get a [CoinAPI](https://www.coinapi.io/) key
@@ -18,12 +20,12 @@ mvn compile exec:java -Dexec.mainClass=org.crypto_portfolio.Main \
 3. Default output:
 
 ```console
-| Asset     | Amount | @ (Paid)  | @ (Current) | Paid        | Balance      | Gain/Loss     | Change     |
-| --------- | ------ | --------- | ----------- | ----------- | ------------ | ------------- | ---------- |
-| ETH       | 101    | 14.056535 | 610.650000  | 1419.71     | 61675.65     | +60255.94     | +4244%     |
-| DOT       | 100    | 6.712500  | 6.650000    | 671.25      | 665.00       | -6.25         | -1%        |
-| AVAX      | 100    | 3.810000  | 2.360000    | 381.00      | 236.00       | -145.00       | -38%       |
-| **TOTAL** | -      | -         | -           | **2471.96** | **62576.65** | **+60104.69** | **+2431%** |
+| Asset     | Amount | @ (Paid) | @ (Current) | Paid        | Balance      | Gain/Loss     | Change     |
+| --------- | ------ | -------- | ----------- | ----------- | ------------ | ------------- | ---------- |
+| ETH       | 101    | 14.06    | 610.65      | 1419.71     | 61675.65     | +60255.94     | +4244%     |
+| DOT       | 100    | 6.71     | 6.65        | 671.25      | 665.00       | -6.25         | -1%        |
+| AVAX      | 100    | 3.81     | 2.36        | 381.00      | 236.00       | -145.00       | -38%       |
+| **TOTAL** | -      | -        | -           | **2471.96** | **62576.65** | **+60104.69** | **+2431%** |
 ```
 
 ## Portfolio JSON
