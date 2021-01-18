@@ -54,7 +54,10 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
     }
 
     public String getAmount() {
-        return amountDecimal.toPlainString();
+        return amountDecimal
+                .setScale(8, RoundingMode.HALF_UP)
+                .stripTrailingZeros()
+                .toPlainString();
     }
 
     private BigDecimal computeTotalPaid() {
@@ -74,6 +77,7 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
         }
         return totalPaidDecimal
                 .setScale(2, RoundingMode.HALF_UP)
+                .stripTrailingZeros()
                 .toPlainString();
     }
 
@@ -82,6 +86,7 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
             return IGNORED;
         }
         return totalPaidDecimal.divide(amountDecimal, 2, RoundingMode.HALF_UP)
+                .stripTrailingZeros()
                 .toPlainString();
     }
 
@@ -91,6 +96,7 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
         }
         return currentUnitPriceInEuros
                 .setScale(2, RoundingMode.HALF_UP)
+                .stripTrailingZeros()
                 .toPlainString();
     }
 
@@ -107,6 +113,7 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
         }
         return currentBalanceDecimal
                 .setScale(2, RoundingMode.HALF_UP)
+                .stripTrailingZeros()
                 .toPlainString();
     }
 
@@ -121,7 +128,9 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
         if (absoluteDeltaDecimal == null) {
             return UNKNOWN;
         }
-        BigDecimal absoluteDelta = absoluteDeltaDecimal.setScale(2, RoundingMode.HALF_UP);
+        BigDecimal absoluteDelta = absoluteDeltaDecimal
+                .setScale(2, RoundingMode.HALF_UP)
+                .stripTrailingZeros();
         return withPlusOrMinusPrefix(absoluteDelta);
     }
 
@@ -142,7 +151,9 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
         if (percentageChangeDecimal == null) {
             return NON_APPLICABLE;
         }
-        BigDecimal percentageChange = percentageChangeDecimal.setScale(0, RoundingMode.HALF_UP);
+        BigDecimal percentageChange = percentageChangeDecimal
+                .setScale(0, RoundingMode.HALF_UP)
+                .stripTrailingZeros();
         return withPlusOrMinusPrefix(percentageChange) + "%";
     }
 

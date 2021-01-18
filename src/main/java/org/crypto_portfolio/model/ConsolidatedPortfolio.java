@@ -30,6 +30,7 @@ public class ConsolidatedPortfolio extends ArrayList<ConsolidatedAsset> {
         }
         return totalPaidDecimal
                 .setScale(2, RoundingMode.HALF_UP)
+                .stripTrailingZeros()
                 .toPlainString();
     }
 
@@ -50,6 +51,7 @@ public class ConsolidatedPortfolio extends ArrayList<ConsolidatedAsset> {
         }
         return totalCurrentBalanceDecimal
                 .setScale(2, RoundingMode.HALF_UP)
+                .stripTrailingZeros()
                 .toPlainString();
     }
 
@@ -68,8 +70,10 @@ public class ConsolidatedPortfolio extends ArrayList<ConsolidatedAsset> {
         if (totalAbsoluteDeltaDecimal == null) {
             return UNKNOWN;
         }
-        return withPlusOrMinusPrefix(totalAbsoluteDeltaDecimal
-                .setScale(2, RoundingMode.HALF_UP));
+        BigDecimal absoluteDelta = totalAbsoluteDeltaDecimal
+                .setScale(2, RoundingMode.HALF_UP)
+                .stripTrailingZeros();
+        return withPlusOrMinusPrefix(absoluteDelta);
     }
 
     private BigDecimal getPercentageChangeDecimal() {
@@ -92,7 +96,9 @@ public class ConsolidatedPortfolio extends ArrayList<ConsolidatedAsset> {
         if (percentageChangeDecimal == null) {
             return UNKNOWN;
         }
-        BigDecimal percentageChange = percentageChangeDecimal.setScale(0, RoundingMode.HALF_UP);
+        BigDecimal percentageChange = percentageChangeDecimal
+                .setScale(0, RoundingMode.HALF_UP)
+                .stripTrailingZeros();
         return withPlusOrMinusPrefix(percentageChange) + "%";
     }
 }
