@@ -157,6 +157,15 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
         return withPlusOrMinusPrefix(percentageChange) + "%";
     }
 
+    public BigDecimal getRawPercentChange() {
+        if (percentageChangeDecimal == null) {
+            return BigDecimal.ZERO; 
+        }
+		return percentageChangeDecimal
+			.setScale(0, RoundingMode.HALF_UP)
+			.stripTrailingZeros();
+    }
+
     protected BigDecimal getAbsoluteDeltaDecimal() {
         return absoluteDeltaDecimal;
     }
