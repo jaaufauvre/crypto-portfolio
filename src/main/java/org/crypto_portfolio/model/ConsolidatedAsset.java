@@ -157,15 +157,6 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
         return withPlusOrMinusPrefix(percentageChange) + "%";
     }
 
-    public BigDecimal getRawPercentChange() {
-        if (percentageChangeDecimal == null) {
-            return BigDecimal.ZERO; 
-        }
-		return percentageChangeDecimal
-			.setScale(0, RoundingMode.HALF_UP)
-			.stripTrailingZeros();
-    }
-
     protected BigDecimal getAbsoluteDeltaDecimal() {
         return absoluteDeltaDecimal;
     }
@@ -180,9 +171,9 @@ public class ConsolidatedAsset implements Comparable<ConsolidatedAsset> {
 
     @Override
     public int compareTo(@NotNull ConsolidatedAsset object) {
-        if (object.absoluteDeltaDecimal == null && this.absoluteDeltaDecimal == null) return 0;
-        if (object.absoluteDeltaDecimal != null && this.absoluteDeltaDecimal == null) return 1;
-        if (object.absoluteDeltaDecimal == null) return -1;
-        return object.absoluteDeltaDecimal.compareTo(this.absoluteDeltaDecimal);
+        if (object.percentageChangeDecimal == null && this.percentageChangeDecimal == null) return 0;
+        if (object.percentageChangeDecimal != null && this.percentageChangeDecimal == null) return 1;
+        if (object.percentageChangeDecimal == null) return -1;
+        return this.percentageChangeDecimal.compareTo(object.percentageChangeDecimal);
     }
 }

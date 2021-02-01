@@ -16,10 +16,8 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.Objects;
 import java.util.Scanner;
 import java.util.stream.Collectors;
-import java.util.Comparator;
 
 import static net.steppschuh.markdowngenerator.table.Table.*;
 
@@ -95,7 +93,7 @@ public class Main {
                 .addRow("Asset", "Amount", "@ (Paid)", "@ (Current)", "Paid", "Balance", "Gain/Loss", "Change");
         consolidatedPortfolio
                 .stream()
-                .sorted(Comparator.comparing(ConsolidatedAsset::getRawPercentChange))
+                .sorted()
                 .forEach(a -> tableBuilder.addRow(a.getName(), a.getAmount(),
                                                             a.getPaidUnitPrice(), a.getCurrentUnitPrice(),
                                                             a.getTotalPaid(), a.getCurrentBalance(),
