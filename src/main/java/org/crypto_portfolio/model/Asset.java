@@ -8,5 +8,6 @@ import java.util.List;
 public class Asset {
     public String id;
     public String name;
+    List<String> hodlers;
     List<Purchase> purchases;
 }
