@@ -19,6 +19,7 @@ import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Collectors;
 
+import static com.fasterxml.jackson.databind.DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES;
 import static net.steppschuh.markdowngenerator.table.Table.*;
 
 public class Main {
@@ -35,6 +36,7 @@ public class Main {
         PORTFOLIO_PATH = path == null ? "src/main/resources/portfolio.json" : path;
         NOT_BEFORE = notBefore == null ? LocalDate.MIN : LocalDate.parse(notBefore);
         IGNORE_ERRORS = "true".equalsIgnoreCase(ignoreErrors);
+        MAPPER.configure(FAIL_ON_UNKNOWN_PROPERTIES, false);
     }
 
     public static void main(String[] args) throws Exception {
